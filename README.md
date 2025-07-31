@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Demo user credentials (one for each tier)
+
+- Platinum tier
+Email : jelon35294@kloudis.com
+Password : Platinumuser11
+
+- Gold tier
+Email : kajenif598@ikanteri.com
+Password : Golduser11
+
+- Silver tier
+Email : yanaga3125@ikanteri.com
+Password : Silveruser11
+
+- Free tier 
+Email : vefij72366@ikanteri.com
+Password : Freeuser11
