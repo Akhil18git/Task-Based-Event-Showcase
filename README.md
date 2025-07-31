@@ -37,18 +37,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Demo user credentials (one for each tier)
 
-- Platinum tier
-Email : jelon35294@kloudis.com
-Password : Platinumuser11
-
-- Gold tier
-Email : kajenif598@ikanteri.com
-Password : Golduser11
-
-- Silver tier
-Email : yanaga3125@ikanteri.com
-Password : Silveruser11
-
 - Free tier 
+
 Email : vefij72366@ikanteri.com
+
 Password : Freeuser11

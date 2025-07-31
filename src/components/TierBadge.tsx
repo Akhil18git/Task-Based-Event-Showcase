@@ -6,7 +6,7 @@ const tierColors = {
 }
 
 export function TierBadge({ tier }: { tier: string }) {
-  // @ts-ignore
+  // @ts-expect-error
   const className = tierColors[tier] || 'bg-gray-400'
   return (
     <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-sm ${className}`}>

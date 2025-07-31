@@ -1,4 +1,6 @@
 import { TierBadge } from '@/components/TierBadge'
+import Image from 'next/image'
+import { Tier } from '@/lib/tiers'
 
 type Event = {
   id: string
@@ -11,19 +13,22 @@ type Event = {
 
 export function EventCard({
   event,
-  userTier,
+  //userTier,
   canAccess,
   onUpgrade
 }: {
   event: Event
-  userTier: string
+  userTier: Tier
   canAccess: boolean
   onUpgrade?: () => void
 }) {
   return (
     <div className="relative bg-white rounded-lg drop-shadow p-4 flex flex-col">
-      <img src={event.image_url || "/placeholder.jpg"}
+      <Image
+           src={event.image_url || "/placeholder.jpg"}
            alt={event.title}
+           width={320}
+           height={160}
            className="h-40 object-cover rounded mb-3"/>
       <TierBadge tier={event.tier} />
       <h3 className="text-lg font-semibold mt-2">{event.title}</h3>

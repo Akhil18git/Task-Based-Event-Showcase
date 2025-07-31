@@ -6,9 +6,18 @@ import { EventCard } from './components/EventCard'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { isTier, Tier, tiers, tierValue } from '@/lib/tiers'
 
+type Event = {
+  id: string
+  title: string
+  description: string
+  event_date: string
+  image_url: string
+  tier: Tier
+}
+
 export default function EventsPage() {
   const { user, isLoaded } = useUser()
-  const [events, setEvents] = useState<any[]>([])
+  const [events, setEvents] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [userTier, setUserTier] = useState<Tier>('free')
@@ -16,9 +25,9 @@ export default function EventsPage() {
 
   useEffect(() => {
     if (user) {
-    const tierFromMetadata = user.publicMetadata.tier
+    const tierFromMetadata = user.unsafeMetadata.tier as Tier | undefined
     // Validate and default to 'free' if not valid
-    if (isTier(tierFromMetadata)) {
+    if (tierFromMetadata && isTier(tierFromMetadata)) {
       setUserTier(tierFromMetadata)
     } else {
       setUserTier('free')
@@ -28,13 +37,18 @@ export default function EventsPage() {
 
   const fetchEvents = useCallback(async () => {
     setLoading(true); setError('');
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .order('event_date', { ascending: true })
-    if (error) setError(error.message)
-    else setEvents(data || [])
+    try{
+      const { data, error: supabaseError } = await supabase
+        .from('events')
+        .select('*')
+        .order('event_date', { ascending: true })
+      if (supabaseError) setError(supabaseError.message)
+      else setEvents(data || [])
+    }catch(err){
+      setError(err instanceof Error ? err.message : 'Failed to fetch events')
+    } finally{
     setLoading(false)
+    }
   }, [])
 
   useEffect(() => { fetchEvents() }, [fetchEvents])
@@ -44,10 +58,18 @@ export default function EventsPage() {
     const i = Math.min(tierValue(userTier) + 1, tiers.length - 1)
     const nextTier = tiers[i]
     try {
-      await user?.setPublicMetadata({ tier: nextTier })
-      setUserTier(nextTier)
-    } catch (e) {
-      alert('Error upgrading')
+      if(user){
+        await user.update({
+          unsafeMetadata: {
+            ...user.unsafeMetadata,
+            tier: nextTier
+          }
+        });
+        setUserTier(nextTier)
+      }
+      
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'Error upgrading');
     } finally {
       setUpgrading(false)
     }
