@@ -7,12 +7,18 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
-  // Always render ClerkProvider, but handle missing key gracefully
   return (
     <html lang="en">
       <body>
         <ClerkProvider
           publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ''}
+          appearance={{
+            variables: {
+              colorPrimary: '#2563eb',
+            }
+          }}
+          afterSignInUrl="/events"
+          afterSignUpUrl="/events"
         >
           {!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && (
             <div className="p-4 text-red-500">
