@@ -6,6 +6,8 @@ import { EventCard } from './components/EventCard'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { isTier, Tier, tiers, tierValue } from '@/lib/tiers'
 
+export const dynamic = 'force-dynamic'
+
 type Event = {
   id: string
   title: string
