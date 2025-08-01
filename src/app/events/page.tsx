@@ -7,6 +7,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { isTier, Tier, tiers, tierValue } from '@/lib/tiers'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 type Event = {
   id: string
@@ -24,6 +25,10 @@ export default function EventsPage() {
   const [error, setError] = useState('')
   const [userTier, setUserTier] = useState<Tier>('free')
   const [upgrading, setUpgrading] = useState(false)
+
+  if(!isLoaded){
+    return <LoadingSpinner/>
+  }
 
   useEffect(() => {
     if (user) {

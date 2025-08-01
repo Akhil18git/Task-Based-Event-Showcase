@@ -7,21 +7,20 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
+  // Always render ClerkProvider, but handle missing key gracefully
   return (
     <html lang="en">
       <body>
-        {process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ? (
-          <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-            {children}
-          </ClerkProvider>
-        ) : (
-          <>
+        <ClerkProvider
+          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ''}
+        >
+          {!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && (
             <div className="p-4 text-red-500">
               Clerk authentication is not configured. Please set NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.
             </div>
-            {children}
-          </>
-        )}
+          )}
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   )
