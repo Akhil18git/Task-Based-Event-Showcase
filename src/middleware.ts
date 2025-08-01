@@ -1,13 +1,12 @@
-// middleware.ts
-import { clerkMiddleware } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-export default clerkMiddleware({
-  //publicRoutes: ['/', '/sign-in', '/sign-up'],
-})
+export default clerkMiddleware();
 
 export const config = {
   matcher: [
-    // Run middleware on all routes except static files and Next internals
-    '/((?!_next|.*\\..*|favicon.ico).*)',
+    '/((?!.*\\..*|_next).*)', // Don't run middleware on static files
+    '/', // Run on root path
+    '/(api|trpc)(.*)', // Run on API routes
+    '/events(.*)' // Explicitly protect events routes
   ],
-}
+};
