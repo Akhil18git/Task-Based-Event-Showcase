@@ -27,7 +27,7 @@ export function EventCard({
       {/* Image Container */}
       <div className="relative h-48 overflow-hidden">
         <Image
-          src={event.image_url || "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=200&fit=crop"}
+          src={event.image_url || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='16' fill='%236b7280'%3EEvent Image%3C/text%3E%3C/svg%3E"}
           alt={event.title}
           width={400}
           height={200}
