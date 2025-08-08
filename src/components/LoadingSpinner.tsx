@@ -1,13 +1,18 @@
 export function LoadingSpinner() {
   return (
-    <div className="flex justify-center items-center my-8">
-      <svg className="animate-spin h-8 w-8 text-gray-500"
-           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle className="opacity-25" cx="12" cy="12" r="10"
-                stroke="currentColor" strokeWidth="4"></circle>
-        <path className="opacity-75" fill="currentColor"
-              d="M4 12a8 8 0 018-8v8z"></path>
-      </svg>
+    <div className="flex flex-col justify-center items-center py-12">
+      <div className="relative">
+        {/* Outer ring */}
+        <div className="w-16 h-16 border-4 border-gray-200 rounded-full"></div>
+        
+        {/* Animated spinner */}
+        <div className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-indigo-500 rounded-full animate-spin"></div>
+        
+        {/* Inner gradient ring */}
+        <div className="absolute top-2 left-2 w-12 h-12 border-4 border-transparent border-t-purple-500 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+      </div>
+      
+      <p className="mt-4 text-gray-600 font-medium">Loading events...</p>
     </div>
   )
 }
